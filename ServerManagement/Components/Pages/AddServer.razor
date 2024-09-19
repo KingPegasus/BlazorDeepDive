@@ -1,11 +1,11 @@
 ﻿@page "/servers/add"
-
+@rendermode InteractiveServer
 @inject NavigationManager NavigationManager
 
 <h3>Add Server</h3>
 <br />
 
-<EditForm Model="server" FormName="formServer" OnValidSubmit="Submit">
+<EditForm Model="server" OnValidSubmit="Submit">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <ValidationSummary></ValidationSummary>
 
@@ -47,7 +47,8 @@
 
 
 @code {
-    [SupplyParameterFromForm(FormName = "formServer")]
+    // No form submission as it is no longer sent through HTTP
+    //[SupplyParameterFromForm(FormName = "formServer")] 
     private Server? server { get; set; } = new Server() { IsOnline = false };
 
     private void Submit()
