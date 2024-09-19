@@ -1,0 +1,31 @@
+﻿
+<div class="container-fluid text-center">
+    <div class="row w-50">
+        @foreach (var city in cities)
+        {
+            <CityComponent 
+                City="@city"
+                SelectedCity="@selectedCity"
+                SelectCityCallback="HandleCitySelection">
+            </CityComponent>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<string> SelectCityCallback { get; set; }
+
+    public void ClearSelection()
+    {
+        this.selectedCity = string.Empty;
+    }
+    private List<string> cities = CitiesRepository.GetCities();
+    private string selectedCity = "Toronto";
+
+    private void HandleCitySelection(string cityName)
+    {
+        selectedCity = cityName;
+        SelectCityCallback.InvokeAsync(cityName);
+    }
+}
