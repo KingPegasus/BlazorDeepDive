@@ -52,6 +52,8 @@
 
     private List<Server>? servers;
 
+    private System.Threading.Timer? Timer;
+
     public override Task SetParametersAsync(ParameterView parameters)
     {
         if (parameters.TryGetValue<string>("CityName", out var cityName))
@@ -84,7 +86,7 @@
             this.CityName = string.Empty;
         }
     }
-
+    
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
@@ -101,6 +103,14 @@
                 this.servers = ServersRepository.SearchServers(this.ServerFilter ?? "");
                 this.CityName = string.Empty;
             }
+            StateHasChanged();
+
+            Timer = new System.Threading.Timer(
+                _ =>
+                {
+                    base.InvokeAsync(StateHasChanged);
+                }, null, 2000, 2000);
         }
+
     }
 }
