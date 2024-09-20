@@ -8,13 +8,40 @@
 } *@
 
 @* Converting using Typed Templated Component*@
-<ul class="list-unstyled">
+@* <ul class="list-unstyled">
     <RepeaterComponent Items="this.servers">
         <Row Context="server">
             <ServerComponent Server="server"></ServerComponent>
         </Row>
     </RepeaterComponent>
-</ul>
+</ul> *@
+
+@* Converting to html table *@
+<table class="table table-striped">
+    <RepeaterComponent Items="servers">
+        <Header>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    City
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    People Online
+                </th>
+                <th></th>
+                <th></th>     
+            </tr>
+        </Header>
+        <Row Context="server">
+            <ServerComponent Server="server"></ServerComponent>
+        </Row>
+    </RepeaterComponent>
+</table>
 
 @code {
     [Parameter]
