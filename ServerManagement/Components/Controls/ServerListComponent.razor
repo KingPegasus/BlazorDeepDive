@@ -52,6 +52,26 @@
 
     private List<Server>? servers;
 
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        if (parameters.TryGetValue<string>("CityName", out var cityName))
+        {
+            if (cityName != CityName)
+            {
+                base.SetParametersAsync(parameters);
+            }
+        }
+
+        if (parameters.TryGetValue<string>("ServerFilter", out var serverFilter))
+        {
+            if (serverFilter != ServerFilter)
+            {
+                base.SetParametersAsync(parameters);
+            }
+        }
+        return Task.CompletedTask;
+    }
+
     protected override void OnParametersSet()
     {
         if (string.IsNullOrWhiteSpace(this.ServerFilter))
@@ -62,6 +82,25 @@
         {
             this.servers = ServersRepository.SearchServers(this.ServerFilter ?? "");
             this.CityName = string.Empty;
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender)
+        {
+            //Init here
+            if (string.IsNullOrWhiteSpace(this.ServerFilter))
+            {
+                this.servers = ServersRepository.GetServersByCity(this.CityName ?? "Toronto");
+            }
+            else
+            {
+                this.servers = ServersRepository.SearchServers(this.ServerFilter ?? "");
+                this.CityName = string.Empty;
+            }
         }
     }
 }
