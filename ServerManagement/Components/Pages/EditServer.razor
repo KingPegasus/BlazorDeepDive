@@ -2,6 +2,11 @@
 
 @inject NavigationManager NavigationManager
 
+@inject IJSRuntime JSRuntime
+
+<NavigationLock 
+    OnBeforeInternalNavigation="OnBeforeInternalNavigation"
+    ConfirmExternalNavigation="true"></NavigationLock>
 <h3>Edit Server</h3>
 <br />
 
@@ -62,6 +67,14 @@
         {
             ServersRepository.UpdateServer(server.ServerId, this.server);
             NavigationManager.NavigateTo("/servers");
+        }
+    }
+    private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+    {
+        var IsConfirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Are you confirm you wan to leave this page?");
+        if (!IsConfirmed)
+        {
+            context.PreventNavigation();
         }
     }
 }
