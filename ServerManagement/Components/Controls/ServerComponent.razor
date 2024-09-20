@@ -8,20 +8,7 @@
             @(Server.IsOnline ? "online" : "offline")
         </td>
 
-        <td>
-        @if (Server.IsOnline)
-        {
-            <button type="button" class="btn btn-outline-danger"
-            onclick="@( () => {Server.IsOnline = false;})">Turn Off</button>
-        }
-        else
-        {
-            <button type="button" class="btn btn-outline-success"
-                    onclick="@( () => {Server.IsOnline = true;})">
-                Turn On
-            </button>
-        }
-        </td>
+
         <td>
         @if (Server.IsOnline)
         {
@@ -33,8 +20,25 @@
         {
             <text>N/A</text>
         }
-        &nbsp;
-        <a href="/servers/@Server.ServerId" class="btn btn-link">Edit</a>
+
+        </td>
+        <td>
+            @if (Server.IsOnline)
+            {
+                <button type="button" class="btn btn-outline-danger"
+                        @onclick="@( () => {Server.IsOnline = false;})">
+                    Turn Off
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-outline-success"
+                        @onclick="@( () => {Server.IsOnline = true;})">
+                    Turn On
+                </button>
+            }
+            &nbsp;
+            <a href="/servers/@Server.ServerId" class="btn btn-link">Edit</a>
         </td>
         <td>
             <EditForm Model="Server"
