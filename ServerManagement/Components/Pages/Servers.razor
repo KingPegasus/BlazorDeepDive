@@ -9,7 +9,8 @@
 <CityListComponent @ref="cityListComponent" SelectCityCallback="HandleCitySelection"></CityListComponent>
 <br />
 
-<SearchBarComponent @ref="searchBarComponent" SearchServerCallback="HandleSearchServer"></SearchBarComponent>
+<SearchBarComponent @ref="searchBarComponent" SearchServerCallback="HandleSearchServer"
+    style="width:500px"></SearchBarComponent>
 <br />
 <CascadingValue Name="SelectedCity" Value="@selectedCity">
     <ServerListComponent 
