@@ -1,11 +1,20 @@
-﻿@if (this.servers !=null && this.servers.Count > 0)
+﻿@* @if (this.servers !=null && this.servers.Count > 0)
 {
-    <ul>
+    <ul class="list-unstyled">
         <Virtualize Items="this.servers" Context="server">
             <ServerComponent Server="server"></ServerComponent>
         </Virtualize>
     </ul>
-}
+} *@
+
+@* Converting using Typed Templated Component*@
+<ul class="list-unstyled">
+    <RepeaterComponent Items="this.servers">
+        <Row Context="server">
+            <ServerComponent Server="server"></ServerComponent>
+        </Row>
+    </RepeaterComponent>
+</ul>
 
 @code {
     [Parameter]
