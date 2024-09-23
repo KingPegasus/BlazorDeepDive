@@ -1,4 +1,7 @@
-﻿@inject NavigationManager NavigationManager
+﻿@using ServerManagement.StateStore
+@inject NavigationManager NavigationManager
+@inject TorontoOnlineServersStore TorontoOnlineServersStore
+
 @if (Server != null)
 {
     <tr style="background-color:@(GetBackgroundColor())">
@@ -26,14 +29,14 @@
             @if (Server.IsOnline)
             {
                 <button type="button" class="btn btn-outline-danger"
-                        @onclick="@( () => {Server.IsOnline = false;})">
+                        @onclick="@( () => {SetServerStatus(false);})">
                     Turn Off
                 </button>
             }
             else
             {
                 <button type="button" class="btn btn-outline-success"
-                        @onclick="@( () => {Server.IsOnline = true;})">
+                        @onclick="@( () => {SetServerStatus(true);})">
                     Turn On
                 </button>
             }
@@ -82,5 +85,23 @@
             }
         }
         return "white";
+    }
+
+    private void SetServerStatus(bool status)
+    {
+        if(this.Server is not null)
+        {
+            if(this.Server.IsOnline != status)
+            {
+                if(this.Server.City.Equals("Toronto", StringComparison.OrdinalIgnoreCase))
+                {
+                    int num = TorontoOnlineServersStore.GetNumberServerOnline();
+                    if (status) TorontoOnlineServersStore.SetNumbersServersOnline(num + 1);
+                    else if (num > 0) TorontoOnlineServersStore.SetNumbersServersOnline(num - 1);
+            }
+                this.Server.IsOnline = status;
+            }
+        }
+        
     }
 }

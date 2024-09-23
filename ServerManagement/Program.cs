@@ -7,8 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents().
     AddInteractiveServerComponents();
 
-builder.Services.AddTransient<SessionStorage>();
-builder.Services.AddScoped<ContainerStorage>(); // use scoped for web server for privacy using signalR channel.
+//builder.Services.AddTransient<SessionStorage>();
+//builder.Services.AddScoped<ContainerStorage>(); // use scoped for web server for privacy using signalR channel.
+builder.Services.AddScoped<TorontoOnlineServersStore>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
