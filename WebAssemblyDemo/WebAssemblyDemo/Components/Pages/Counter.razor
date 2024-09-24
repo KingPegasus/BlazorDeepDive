@@ -1,0 +1,21 @@
+﻿@page "/counter"
+
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+<br />
+
+<h3>Server Interactivity</h3>
+<WebAssemblyDemo.Client.Pages.CounterComponent @rendermode="InteractiveServer"></WebAssemblyDemo.Client.Pages.CounterComponent>
+<br />
+<br />
+<br />
+<br />
+
+<h3>WebAssembly Interactivity</h3>
+<WebAssemblyDemo.Client.Pages.CounterComponent @rendermode="InteractiveWebAssembly"></WebAssemblyDemo.Client.Pages.CounterComponent>
+
+@code {
+
+}
