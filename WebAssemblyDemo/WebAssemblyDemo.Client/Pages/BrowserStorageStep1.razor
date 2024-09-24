@@ -17,7 +17,7 @@
 @code {
     private string data = "";
 
-    private async Task GoNext()
+    private void GoNext()
     {
         //await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "demo-data", data);
         ContainerStorage.SetMessage(data);
