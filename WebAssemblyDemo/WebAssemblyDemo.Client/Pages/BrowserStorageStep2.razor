@@ -4,7 +4,7 @@
 
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
-
+@inject ContainerStorage ContainerStorage
 <h3>Browser Storage Step2</h3>
 <br />
 <br />
@@ -18,7 +18,8 @@
     {
         if (firstRender)
         {
-            data = await JSRuntime.InvokeAsync<string>("sessionStorage.getItem", "demo-data");
+            //data = await JSRuntime.InvokeAsync<string>("sessionStorage.getItem", "demo-data");
+            data = ContainerStorage.GetMessage();
             StateHasChanged();
         }
     }

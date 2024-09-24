@@ -4,6 +4,7 @@
 
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
+@inject ContainerStorage ContainerStorage
 
 <h3>Browser Storage Step1</h3>
 <br />
@@ -18,8 +19,8 @@
 
     private async Task GoNext()
     {
-        await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "demo-data", data);
-
+        //await JSRuntime.InvokeVoidAsync("sessionStorage.setItem", "demo-data", data);
+        ContainerStorage.SetMessage(data);
         NavigationManager.NavigateTo("/browser_wasm_2");
     }
 
