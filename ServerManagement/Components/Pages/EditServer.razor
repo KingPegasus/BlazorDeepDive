@@ -1,7 +1,7 @@
 ﻿@page "/servers/{id:int}"
 
 @inject NavigationManager NavigationManager
-
+@inject IServersEFCoreRepository ServersEFCoreRepository
 @inject IJSRuntime JSRuntime
 
 @* <NavigationLock 
@@ -56,7 +56,7 @@
 
     protected override void OnParametersSet()
     {
-        server ??= ServersRepository.GetServerById(this.Id);
+        server ??= ServersEFCoreRepository.GetServerById(this.Id);
         // ??= means only populate if server is null
 
     }
@@ -65,7 +65,7 @@
     {
         if(server != null)
         {
-            ServersRepository.UpdateServer(server.ServerId, this.server);
+            ServersEFCoreRepository.UpdateServer(server.ServerId, this.server);
             NavigationManager.NavigateTo($"/servers/back_from/{this.server.City}");
         }
     }
