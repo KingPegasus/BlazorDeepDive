@@ -3,6 +3,7 @@ using ServerManagement.Components;
 using ServerManagement.Data;
 using ServerManagement.Models;
 using ServerManagement.StateStore;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddScoped<ContainerStorage>(); // use scoped for web server for
 builder.Services.AddScoped<TorontoOnlineServersStore>();
 
 builder.Services.AddTransient<IServersEFCoreRepository, ServersEFCoreRepository>();
+
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
