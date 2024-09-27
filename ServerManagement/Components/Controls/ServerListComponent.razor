@@ -1,49 +1,21 @@
 ﻿@inject IServersEFCoreRepository ServersEFCoreRepository
 
-@* @if (this.servers !=null && this.servers.Count > 0)
-{
-    <ul class="list-unstyled">
-        <Virtualize Items="this.servers" Context="server">
-            <ServerComponent Server="server"></ServerComponent>
-        </Virtualize>
-    </ul>
-} *@
-
-@* Converting using Typed Templated Component*@
-@* <ul class="list-unstyled">
-    <RepeaterComponent Items="this.servers">
-        <Row Context="server">
-            <ServerComponent Server="server"></ServerComponent>
-        </Row>
-    </RepeaterComponent>
-</ul> *@
-
-@* Converting to html table *@
-<table class="table table-striped">
-    <RepeaterComponent Items="servers">
-        <Header>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    City
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    People Online
-                </th>
-                <th></th>
-                <th></th>     
-            </tr>
-        </Header>
-        <Row Context="server">
-            <ServerComponent Server="server"></ServerComponent>
-        </Row>
-    </RepeaterComponent>
-</table>
+<MudTable Items="@servers" Hover="true" SortLabel="Sort By" Striped="true">
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<Server, object>(x=>(x.Name!=null)?x.Name:String.Empty)">Name</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel Enabled="true" SortBy="new Func<Server, object>(x=>(x.City!=null)?x.City:String.Empty)">City</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<Server, object>(x=>x.IsOnline)">Status</MudTableSortLabel></MudTh>
+        <MudTh>People Online</MudTh>
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <ServerComponent Server="@context"></ServerComponent>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[] { 5, 10, 15, 25 }" />
+    </PagerContent>
+</MudTable>
 
 @code {
     [Parameter]
@@ -88,7 +60,7 @@
             this.CityName = string.Empty;
         }
     }
-    
+
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);

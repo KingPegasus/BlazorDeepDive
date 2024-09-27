@@ -5,53 +5,41 @@
 
 @if (Server != null)
 {
-    <tr style="background-color:@(GetBackgroundColor())">
-        <td>@Server.Name</td>
-        <td>@Server.City</td>
-        <td style="color:@(Server.IsOnline?"green":"red")">
-            @(Server.IsOnline ? "online" : "offline")
-        </td>
+    <MudTd DataLabel="Name">@Server.Name</MudTd>
+    <MudTd DataLabel="City">@Server.City</MudTd>
+    <MudTd DataLabel="Status">@(Server.IsOnline ? "online" : "offline")</MudTd>
+    <MudTd DataLabel="People Online">
+        @if (Server.IsOnline)
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(0, 500);
+            <MudText Typo="Typo.body2">@randomNumber</MudText>
+        }
+        else
+        {
+            <MudText Typo="Typo.body2">N/A</MudText>
+        }
+    </MudTd>
+    <MudTd>
+        @if (Server.IsOnline)
+        {
+            <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="@( () => {SetServerStatus(false);})">Turn Off</MudButton>
+        }
+        else
+        {
+            <MudButton Variant="Variant.Outlined" Color="Color.Success" OnClick="@( () => {SetServerStatus(true);})">Turn On</MudButton>
+        }
+        &nbsp;
+        <MudLink Href=@("/servers/" + Server.ServerId) Class="btn-link">Edit</MudLink>
 
-
-        <td>
-            @if (Server.IsOnline)
-            {
-                Random random = new Random();
-                int randomNumber = random.Next(0, 500);
-                <text>@randomNumber</text>
-            }
-            else
-            {
-                <text>N/A</text>
-            }
-
-        </td>
-        <td>
-            @if (Server.IsOnline)
-            {
-                <button type="button" class="btn btn-outline-danger"
-                        @onclick="@( () => {SetServerStatus(false);})">
-                    Turn Off
-                </button>
-            }
-            else
-            {
-                <button type="button" class="btn btn-outline-success"
-                        @onclick="@( () => {SetServerStatus(true);})">
-                    Turn On
-                </button>
-            }
-            &nbsp;
-            <a href="/servers/@Server.ServerId" class="btn btn-link">Edit</a>
-        </td>
-        <td>
-            <EditForm Model="Server"
-                      FormName=@($"form-server-{Server.ServerId}")
-                      OnValidSubmit="@( () => { DeleteServer(Server.ServerId);})">
-                <button type="submit" class="btn btn-primary">Delete</button>
-            </EditForm>
-        </td>
-    </tr>
+    </MudTd>
+    <MudTd>
+        <EditForm Model="@Server"
+                  FormName=@($"form-server-{Server.ServerId}")
+                  OnValidSubmit="@( () => { DeleteServer(Server.ServerId);})">
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Delete</MudButton>
+        </EditForm>
+    </MudTd>
 }
 
 
