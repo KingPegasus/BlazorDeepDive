@@ -14,16 +14,16 @@
 
 
         <td>
-        @if (Server.IsOnline)
-        {
-            Random random = new Random();
-            int randomNumber = random.Next(0, 500);
-            <text>@randomNumber</text>
-        }
-        else
-        {
-            <text>N/A</text>
-        }
+            @if (Server.IsOnline)
+            {
+                Random random = new Random();
+                int randomNumber = random.Next(0, 500);
+                <text>@randomNumber</text>
+            }
+            else
+            {
+                <text>N/A</text>
+            }
 
         </td>
         <td>
@@ -90,11 +90,11 @@
 
     private void SetServerStatus(bool status)
     {
-        if(this.Server is not null)
+        if (this.Server is not null)
         {
-            if(this.Server.IsOnline != status)
+            if (this.Server.IsOnline != status && this.Server.City is not null)
             {
-                if(this.Server.City.Equals("Toronto", StringComparison.OrdinalIgnoreCase))
+                if (this.Server.City.Equals("Toronto", StringComparison.OrdinalIgnoreCase))
                 {
                     int num = TorontoOnlineServersStore.GetNumberServerOnline();
                     if (status) TorontoOnlineServersStore.SetNumbersServersOnline(num + 1);
@@ -104,6 +104,6 @@
                 ServersEFCoreRepository.UpdateServer(this.Server.ServerId, Server);
             }
         }
-        
+
     }
 }

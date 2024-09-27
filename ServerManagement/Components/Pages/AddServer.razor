@@ -49,8 +49,8 @@
 
 @code {
     // No form submission as it is no longer sent through HTTP
-    //[SupplyParameterFromForm(FormName = "formServer")] 
-    private Server? server { get; set; } = new Server() { IsOnline = false };
+    //[SupplyParameterFromForm(FormName = "formServer")]
+    private Server server { get; set; } = new Server() { IsOnline = false };
 
     private void Submit()
     {

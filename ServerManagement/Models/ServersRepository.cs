@@ -30,7 +30,15 @@
 
         public static List<Server> GetServersByCity(string cityName)
         {
-            return servers.Where(s => s.City.Equals(cityName, StringComparison.OrdinalIgnoreCase)).ToList();
+            List<Server> serversByCity = [];
+            foreach (var server in servers)
+            {
+                if (server.City is not null && server.City.Equals(cityName, StringComparison.OrdinalIgnoreCase))
+                {
+                    serversByCity.Add(server);
+                }
+            }
+            return serversByCity;
         }
 
         public static Server? GetServerById(int id)
@@ -74,7 +82,15 @@
 
         public static List<Server> SearchServers(string serverFilter)
         {
-            return servers.Where(s => s.Name.Contains(serverFilter, StringComparison.OrdinalIgnoreCase)).ToList();
+            List<Server> serversByFilter = [];
+            foreach (var server in servers)
+            {
+                if (server.Name is not null && server.Name.Contains(serverFilter, StringComparison.OrdinalIgnoreCase))
+                {
+                    serversByFilter.Add(server);
+                }
+            }
+            return serversByFilter;
         }
     }
 }

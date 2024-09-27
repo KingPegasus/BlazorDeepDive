@@ -23,6 +23,7 @@ namespace ServerManagement.StateStore
 
         public async Task SetServerAsync(Server? server)
         {
+            if (server is null) throw new ArgumentNullException(nameof(server));
             await this.protectedSessionStorage.SetAsync("server", server);
         }
     }

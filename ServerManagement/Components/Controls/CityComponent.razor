@@ -1,23 +1,19 @@
 ﻿@using ServerManagement.StateStore
-
-@implements IDisposable
 @inject TorontoOnlineServersStore TorontoOnlineServersStore
+@implements IDisposable
 
-<div class="col">
-    <div class="card @(SelectedCity.Equals(City, StringComparison.OrdinalIgnoreCase)?"border-primary":"")">
-        <img src="@($"/images/{City}.png")" class="card-img-top" alt="...">
-        <div class="card-body">
-            <button type="button" class="btn btn-primary" @onclick="@( () => {SelectCity(City);})">
-                @City
-            </button>
-        </div>
-        <div>
-            @if(City.Equals("Toronto", StringComparison.OrdinalIgnoreCase))
+
+<div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 align-content-center align-items-center">
+    <MudCard Class="@(SelectedCity.Equals(City, StringComparison.OrdinalIgnoreCase)?selectedMudCardClass:unselectMudCardClass)">
+        <MudImage Src="@($"/images/{City}.png")" Alt="City Image" Elevation="0" Class="align-content-center rounded-lg" Height="200" Width="200" />
+        <MudCardContent Class="align-content-center">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@( () => {SelectCity(City);})">@City</MudButton>
+            @if (City.Equals("Toronto", StringComparison.OrdinalIgnoreCase))
             {
-                <text>@numberServersOnlineToronto</text>
+                <MudText Typo="Typo.body2" Class="mt-1">Online: @numberServersOnlineToronto</MudText>
             }
-        </div>
-    </div>
+        </MudCardContent>
+    </MudCard>
 </div>
 
 @code {
@@ -29,6 +25,9 @@
 
     [Parameter]
     public EventCallback<string> SelectCityCallback { get; set; }
+
+    private string selectedMudCardClass = "border border-solid mud-border-primary ma-2 align-items-center object-contain";
+    private string unselectMudCardClass = "ma-2 align-items-center object-contain";
 
     private int numberServersOnlineToronto;
 
@@ -57,4 +56,5 @@
     {
         TorontoOnlineServersStore.RemoveStateChangeListeners(OnServersStatusChange);
     }
+
 }
