@@ -5,7 +5,7 @@ namespace ServerManagement.Data
 {
     public class ServerManagementContext : DbContext
     {
-        public ServerManagementContext(DbContextOptions<ServerManagementContext> options): base(options)
+        public ServerManagementContext(DbContextOptions<ServerManagementContext> options) : base(options)
         {
             //leave empty - it get the work done using base(options)
         }

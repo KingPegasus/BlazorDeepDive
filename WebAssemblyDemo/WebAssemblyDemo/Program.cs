@@ -1,5 +1,4 @@
 using WebAssemblyDemo.Client;
-using WebAssemblyDemo.Client.Pages;
 using WebAssemblyDemo.Components;
 
 var builder = WebApplication.CreateBuilder(args);

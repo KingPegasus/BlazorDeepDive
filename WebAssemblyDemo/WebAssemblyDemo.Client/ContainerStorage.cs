@@ -6,6 +6,6 @@
 
         public string GetMessage() { return _message; }
 
-        public void SetMessage(string Message) {  _message = Message; }
+        public void SetMessage(string Message) { _message = Message; }
     }
 }

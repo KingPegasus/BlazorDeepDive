@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
+using MudBlazor.Services;
 using ServerManagement.Components;
 using ServerManagement.Data;
 using ServerManagement.Models;
 using ServerManagement.StateStore;
-using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // AddDbContext is scoped. AddDbContextFactory is Singleton
-builder.Services.AddDbContextFactory<ServerManagementContext>( options =>
+builder.Services.AddDbContextFactory<ServerManagementContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BlazorManagement"));
 });
