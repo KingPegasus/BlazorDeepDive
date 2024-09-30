@@ -1,15 +1,23 @@
-﻿<div class="input-group mb-3 input-width" @attributes="OtherAttributes">
-    <input type="text" class="form-control" placeholder="Search Servers" @bind-value="serverFilter" @bind-value:event="oninput" />
-    <button class="btn btn-outline-secondary" type="button" id="button-search" @onclick="HandleSearch">Search</button>
+﻿<MudGrid>
+    <MudItem>
+        <MudTextField @bind-Value="serverFilter"
+                      Immediate="true"
+                      Placeholder="Search Servers"
+                      Class="form-control"
+                      Variant="Variant.Outlined"
+                      Adornment="Adornment.End"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      @attributes="OtherAttributes" />
+    </MudItem>
+</MudGrid>
 
-</div>
 
 @code {
     [Parameter]
     public EventCallback<string> SearchServerCallback { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? OtherAttributes { get; set; } 
+    public Dictionary<string, object>? OtherAttributes { get; set; }
 
     private string _serverFilter = string.Empty;
     private string serverFilter
@@ -19,7 +27,7 @@
         {
             _serverFilter = value;
             // do whatever you want
-            if (_serverFilter!= string.Empty)
+            if (_serverFilter != string.Empty)
             {
                 SearchServerCallback.InvokeAsync(serverFilter);
             }

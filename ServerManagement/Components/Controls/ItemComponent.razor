@@ -1,42 +1,28 @@
 ﻿@if (Item != null)
 {
-    <li @key="Item.Id">
-        <div class="row mb-2">
-            <div class="col-1" style="width:30px">
-                <input type="checkbox"
-                       style="vertical-align:middle"
-                       class="form-check-input"
-                       @bind-value="Item.IsCompleted"
-                       checked="@Item.IsCompleted" />
-            </div>
+    <MudGrid @key="Item">
+        <MudItem xs="1">
+            <MudCheckBox T="bool" @bind-Value="Item.IsCompleted" />
+        </MudItem>
 
-            <div class="col">
-                @if (Item.IsCompleted)
-                {
-                    <input type="text"
-                           style="vertical-align:middle"
-                           class="form-control border-0 text-decoration-line-through"
-                           @bind-value="Item.Name"
-                           disabled />
-                }
-                else
-                {
-                    <input type="text"
-                           style="vertical-align:middle"
-                           class="form-control border-0"
-                           @bind-value="Item.Name" />
-                }
-            </div>
-            <div class="col">
-                @if (Item.IsCompleted)
-                {
-                    <text> Completed at: @Item.DateCompleted.ToLongDateString()</text>
-                }
+        <MudItem xs="6">
+            @if (Item.IsCompleted)
+            {
+                <MudTextField @bind-Value="Item.Name" Disabled Class="text-decoration-line-through" />
+            }
+            else
+            {
+                <MudTextField @bind-Value="Item.Name" />
+            }
+        </MudItem>
 
-            </div>
-        </div>
-
-    </li>
+        <MudItem xs="5">
+            @if (Item.IsCompleted)
+            {
+                <MudText>Completed at: @Item.DateCompleted.ToLongDateString()</MudText>
+            }
+        </MudItem>
+    </MudGrid>
 }
 
 @code {

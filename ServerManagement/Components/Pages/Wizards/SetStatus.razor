@@ -9,31 +9,22 @@
 @inject ContainerStorage containerStorage
 @inject IServersEFCoreRepository ServersEFCoreRepository
 
-<h3>Server Status</h3>
-<br />
+<MudPaper Class="pt-3 mx-2 mt-2 mb-4" Elevation="0">
 
-@if (server is not null)
-{
-    <FieldComponent Label="Server Status">
-        <Control>
-            @if (server.IsOnline)
-            {
-                <input type="checkbox"
-                       @bind-value="server.IsOnline"
-                       checked class="form-check-input"></input>
-            }
-            else
-            {
-                <input type="checkbox"
-                       @bind-value="server.IsOnline"
-                       class="form-check-input"></input>
-            }
-
-        </Control>
-    </FieldComponent>
+    <MudText Typo="Typo.h4">Server Status</MudText>
     <br />
-    <button type="button" class="btn btn-primary" @onclick="Save">Save</button>
-}
+
+    @if (server is not null)
+    {
+        <FieldComponent Label="Server Status">
+            <Control>
+                <MudCheckBox @bind-Value="server.IsOnline" />
+            </Control>
+        </FieldComponent>
+        <br />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Save">Save</MudButton>
+    }
+</MudPaper>
 
 @code {
     private Server? server;

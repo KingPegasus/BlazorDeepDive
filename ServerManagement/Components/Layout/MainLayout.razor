@@ -11,9 +11,10 @@
 <MudSnackbarProvider />
 
 <MudLayout>
+
     <MudAppBar>
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="DrawerToggle" />
-         <MudText Typo="Typo.h6" Class="px-4 mud-text-secondary" Style="@($"color: white")">Blazor Deep Dive</MudText>
+         <MudText Typo="Typo.h6" Class="px-4 mud-text-secondary" Style="@("color: white")">Blazor Deep Dive</MudText>
     </MudAppBar>
 
     <NavMenu DrawerOpen="@_drawerOpen" />
@@ -23,23 +24,8 @@
             @Body
         </MudContainer>
     </MudMainContent>
+
 </MudLayout>
-
-@* <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div> *@
 
 @code {
     bool _drawerOpen = true;

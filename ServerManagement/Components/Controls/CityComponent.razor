@@ -3,18 +3,19 @@
 @implements IDisposable
 
 
-<div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 align-content-center align-items-center">
+<MudItem xs="12" sm="6" md="4" lg="3" xl="2" Class="d-flex">
     <MudCard Class="@(SelectedCity.Equals(City, StringComparison.OrdinalIgnoreCase)?selectedMudCardClass:unselectMudCardClass)">
         <MudImage Src="@($"/images/{City}.png")" Alt="City Image" Elevation="0" Class="align-content-center rounded-lg" Height="200" Width="200" />
         <MudCardContent Class="align-content-center">
             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@( () => {SelectCity(City);})">@City</MudButton>
             @if (City.Equals("Toronto", StringComparison.OrdinalIgnoreCase))
             {
-                <MudText Typo="Typo.body2" Class="mt-1">Online: @numberServersOnlineToronto</MudText>
+                <MudText Typo="Typo.body2" Class="mt-1 d-grid justify-content-center">Online: @numberServersOnlineToronto</MudText>
             }
         </MudCardContent>
     </MudCard>
-</div>
+</MudItem>
+
 
 @code {
     [Parameter]

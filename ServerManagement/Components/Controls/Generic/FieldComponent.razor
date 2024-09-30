@@ -1,15 +1,18 @@
-﻿<div class="row mb-3">
-    <div class="col-2">
-        <label class="col-form-label">@Label</label>
-    </div>
-    <div class="col-6 input-width">
-        @Control
-    </div>
-    <div class="col">
-        @ValidationControl
-    </div>
-</div>
+﻿<MudGrid Class="align-center">
 
+    <MudItem xs="2" >
+        <MudText Typo="Typo.body1">@Label</MudText>
+    </MudItem>
+
+    <MudItem xs="6">
+        @Control
+    </MudItem>
+
+    <MudItem xs="4">
+        @ValidationControl
+    </MudItem>
+
+</MudGrid>
 @code {
     [Parameter]
     public string? Label { get; set; }

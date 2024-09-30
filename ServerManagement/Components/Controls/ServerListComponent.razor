@@ -1,6 +1,7 @@
 ﻿@inject IServersEFCoreRepository ServersEFCoreRepository
 
 <MudTable Items="@servers" Hover="true" SortLabel="Sort By" Striped="true">
+
     <HeaderContent>
         <MudTh><MudTableSortLabel SortBy="new Func<Server, object>(x=>(x.Name!=null)?x.Name:String.Empty)">Name</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel Enabled="true" SortBy="new Func<Server, object>(x=>(x.City!=null)?x.City:String.Empty)">City</MudTableSortLabel></MudTh>
@@ -9,12 +10,15 @@
         <MudTh></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
+
     <RowTemplate>
         <ServerComponent Server="@context"></ServerComponent>
     </RowTemplate>
+
     <PagerContent>
         <MudTablePager PageSizeOptions="new int[] { 5, 10, 15, 25 }" />
     </PagerContent>
+
 </MudTable>
 
 @code {
@@ -85,6 +89,5 @@
                     base.InvokeAsync(StateHasChanged);
                 }, null, 2000, 2000);
         }
-
     }
 }

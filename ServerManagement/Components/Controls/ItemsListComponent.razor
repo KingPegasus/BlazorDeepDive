@@ -1,10 +1,13 @@
 ﻿@if (Items != null && Items.Count > 0)
 {
-    @foreach (var item in Items)
-    {
-        <ItemComponent Item="item"></ItemComponent>
-    }
+    <MudList T="ToDoItem" SelectionMode="SelectionMode.MultiSelection">
+        @foreach (var item in Items)
+        {
+            <ItemComponent Item="item"></ItemComponent>
+        }
+    </MudList>
 }
+
 @code {
     [Parameter]
     public List<ToDoItem>? Items { get; set; }

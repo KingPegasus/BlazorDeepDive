@@ -1,16 +1,19 @@
 ﻿@page "/todolist"
 @rendermode InteractiveServer
 
-<h3>To Do</h3>
+<PageTitle>To Do</PageTitle>
+<MudPaper Class="pt-3 mx-2 mt-2 mb-4" Elevation="0">
+    <MudText Typo="Typo.h3">To Do</MudText>
+</MudPaper>
+<br />
 
-<button type="button" class="btn btn-primary" @onclick="AddTask">Add Task</button>
+<MudButton OnClick="AddTask" Variant="Variant.Filled" Color="Color.Primary" Class="mx-3">Add Task</MudButton>
 <br />
 <br />
-@if (items != null && items.Count >0)
+
+@if (items != null && items.Count > 0)
 {
-    <ul class="list-unstyled">
-        <ItemsListComponent Items="items"></ItemsListComponent>
-    </ul>
+    <ItemsListComponent Items="items"></ItemsListComponent>
 }
 
 @code {

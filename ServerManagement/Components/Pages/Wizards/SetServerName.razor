@@ -8,27 +8,30 @@
 @inject NavigationManager NavigationManager
 @inject ContainerStorage containerStorage
 
-<h3>Server Name</h3>
-<br />
+<MudPaper Class="pt-3 mx-2 mt-2 mb-4" Elevation="0">
 
-@if (!string.IsNullOrWhiteSpace(errorMessage))
-{
-    <div class="alert alert-danger">
-        @errorMessage
-    </div>
-}
-
-@if (server is not null)
-{
-    <FieldComponent Label="Name">
-        <Control>
-            <input type="text" @bind-value="server.Name" class="form-control"></input>
-        </Control>
-    </FieldComponent>
+    <MudText Typo="Typo.h4">Server Name</MudText>
     <br />
-    <button type="button" class="btn btn-primary" @onclick="GoNext">Next</button>
-}
 
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <MudAlert Severity="Severity.Error">
+            @errorMessage
+        </MudAlert>
+    }
+
+    @if (server is not null)
+    {
+        <FieldComponent Label="Name">
+            <Control>
+                <MudTextField @bind-Value="server.Name" Label="Server Name" Variant="Variant.Outlined"></MudTextField>
+            </Control>
+        </FieldComponent>
+        <br />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="GoNext">Next</MudButton>
+    }
+</MudPaper>
 
 @code {
     private Server? server;
@@ -64,5 +67,4 @@
             }
         }
     }
-
 }

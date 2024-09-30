@@ -7,6 +7,8 @@
 @inject TorontoOnlineServersStore TorontoOnlineServersStore
 @inject IServersEFCoreRepository ServersEFCoreRepository
 
+<PageTitle>Servers</PageTitle>
+
 <MudPaper Class="pt-3 mx-2 mt-2 mb-4" Elevation="0">
     <MudText Typo="Typo.h3">Servers</MudText>
 </MudPaper>
@@ -25,11 +27,12 @@
                          CityName="@selectedCity"
                          ServerFilter="@serverFilter"></ServerListComponent>
 </CascadingValue>
+<br />
 
-
-<MudButton Href="/servername" Target="_blank" Variant="Variant.Filled" Color="Color.Primary">Add Server</MudButton>
+<MudButton Href="/servername" Variant="Variant.Filled" Color="Color.Primary">Add Server</MudButton>
 <br />
 <br />
+
 @code {
     [Parameter]
     public string? CityName { get; set; }
